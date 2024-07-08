@@ -1,8 +1,8 @@
-const API_URL = 'YOUR_GOOGLE_SCRIPT_API_URL'; // Replace with your Google Script API URL
+const API_URL = 'https://script.google.com/macros/s/AKfycbyBnjPPHIo3kDN9OoEThht6AjqWtNuY3yNA8qbYzdoMSD7I31RFcu9GR_RV19LW03cW/exec'; // Replace with your Google Script API URL
 
 // Fetch all contacts from the server
 function fetchContacts() {
-    fetch(`${API_URL}?action=getContacts`)
+    fetch(`${https://script.google.com/macros/s/AKfycbyBnjPPHIo3kDN9OoEThht6AjqWtNuY3yNA8qbYzdoMSD7I31RFcu9GR_RV19LW03cW/exec}?action=getContacts`)
         .then(response => response.json())
         .then(data => {
             const contactsTable = document.getElementById('contactsTable').getElementsByTagName('tbody')[0];
@@ -39,7 +39,7 @@ document.getElementById('contactForm').addEventListener('submit', function(event
     const data = Object.fromEntries(formData.entries());
     data.action = 'addContact';
 
-    fetch(API_URL, {
+    fetch(https://script.google.com/macros/s/AKfycbyBnjPPHIo3kDN9OoEThht6AjqWtNuY3yNA8qbYzdoMSD7I31RFcu9GR_RV19LW03cW/exec, {
         method: 'POST',
         body: JSON.stringify(data),
         headers: {
@@ -58,7 +58,7 @@ document.getElementById('contactForm').addEventListener('submit', function(event
 // Delete a contact
 function deleteContact(id) {
     if (confirm('Are you sure you want to delete this contact?')) {
-        fetch(`${API_URL}?action=deleteContact&id=${id}`)
+        fetch(`${https://script.google.com/macros/s/AKfycbyBnjPPHIo3kDN9OoEThht6AjqWtNuY3yNA8qbYzdoMSD7I31RFcu9GR_RV19LW03cW/exec}?action=deleteContact&id=${id}`)
             .then(response => response.json())
             .then(result => {
                 alert(result);
