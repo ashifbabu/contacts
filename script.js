@@ -2,7 +2,7 @@ const API_URL = 'https://script.google.com/macros/s/AKfycbyBnjPPHIo3kDN9OoEThht6
 
 // Fetch all contacts from the server
 function fetchContacts() {
-    fetch(`${https://script.google.com/macros/s/AKfycbyBnjPPHIo3kDN9OoEThht6AjqWtNuY3yNA8qbYzdoMSD7I31RFcu9GR_RV19LW03cW/exec}?action=getContacts`)
+    fetch(`${API_URL}?action=getContacts`)
         .then(response => response.json())
         .then(data => {
             const contactsTable = document.getElementById('contactsTable').getElementsByTagName('tbody')[0];
@@ -28,6 +28,49 @@ function fetchContacts() {
                 const actionsCell = row.insertCell(16);
                 actionsCell.innerHTML = `<button onclick="deleteContact('${contact.id}')">Delete</button>`;
             });
+        })
+        .catch(error => console.error('Error fetching contacts:', error));
+}
+
+// Add a new contact
+document.getElementById('contactForm').addEventListener('submit', function(event) {
+    event.preventDefault();
+    const formData = new FormData(event.target);
+    const data = Object.fromEntries(formData.entries());
+    data.action = 'addContact';
+
+    fetch(API_URL, {
+        method: 'POST',
+        body: JSON.stringify(data),
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    })
+    .then(response => response.text())
+    .then(result => {
+        alert(result);
+        fetchContacts();
+        event.target.reset();
+    })
+    .catch(error => console.error('Error adding contact:', error));
+});
+
+// Delete a contact
+function deleteContact(id) {
+    if (confirm('Are you sure you want to delete this contact?')) {
+        fetch(`${API_URL}?action=deleteContact&id=${id}`)
+            .then(response => response.json())
+            .then(result => {
+                alert(result);
+                fetchContacts();
+            })
+            .catch(error => console.error('Error deleting contact:', error));
+    }
+}
+
+// Initial fetch of contacts when the page loads
+document.addEventListener('DOMContentLoaded', fetchContacts);
+
         })
         .catch(error => console.error('Error fetching contacts:', error));
 }
