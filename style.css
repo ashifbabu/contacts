@@ -1,111 +1,74 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contact Management</title>
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
-    <header>
-        <h1>Contact Management</h1>
-        <nav>
-            <ul>
-                <li><a href="#viewContacts">View Contacts</a></li>
-                <li><a href="#addContact">Add Contact</a></li>
-            </ul>
-        </nav>
-    </header>
-    <main>
-        <section id="viewContacts">
-            <h2>View Contacts</h2>
-            <button onclick="fetchContacts()">Refresh Contacts</button>
-            <table id="contactsTable">
-                <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>First Name</th>
-                        <th>Last Name</th>
-                        <th>DOB</th>
-                        <th>Gender</th>
-                        <th>Passport Number</th>
-                        <th>Date of Expiry</th>
-                        <th>Nationality</th>
-                        <th>Email</th>
-                        <th>Mobile</th>
-                        <th>Organization</th>
-                        <th>Designation</th>
-                        <th>Address</th>
-                        <th>City</th>
-                        <th>Postal Code</th>
-                        <th>Country</th>
-                        <th>Actions</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <!-- Contacts will be dynamically added here -->
-                </tbody>
-            </table>
-        </section>
-        <section id="addContact">
-            <h2>Add Contact</h2>
-            <form id="contactForm">
-                <input type="hidden" id="contactId" name="id">
-                <label for="firstName">First Name:</label>
-                <input type="text" id="firstName" name="firstName" required>
-                
-                <label for="lastName">Last Name:</label>
-                <input type="text" id="lastName" name="lastName" required>
-                
-                <label for="dob">Date of Birth:</label>
-                <input type="date" id="dob" name="dob" required>
-                
-                <label for="gender">Gender:</label>
-                <select id="gender" name="gender" required>
-                    <option value="Male">Male</option>
-                    <option value="Female">Female</option>
-                </select>
-                
-                <label for="passportNumber">Passport Number:</label>
-                <input type="text" id="passportNumber" name="passportNumber" required>
-                
-                <label for="dateOfExpiry">Date of Expiry:</label>
-                <input type="date" id="dateOfExpiry" name="dateOfExpiry" required>
-                
-                <label for="nationality">Nationality:</label>
-                <input type="text" id="nationality" name="nationality" required>
-                
-                <label for="email">Email:</label>
-                <input type="email" id="email" name="email" required>
-                
-                <label for="mobile">Mobile:</label>
-                <input type="text" id="mobile" name="mobile" required>
-                
-                <label for="organization">Organization:</label>
-                <input type="text" id="organization" name="organization">
-                
-                <label for="designation">Designation:</label>
-                <input type="text" id="designation" name="designation">
-                
-                <label for="address">Address:</label>
-                <input type="text" id="address" name="houseStreetVillage">
-                
-                <label for="city">City:</label>
-                <input type="text" id="city" name="city">
-                
-                <label for="postalCode">Postal Code:</label>
-                <input type="text" id="postalCode" name="postalCode">
-                
-                <label for="country">Country:</label>
-                <input type="text" id="country" name="country">
-                
-                <button type="submit">Save Contact</button>
-            </form>
-        </section>
-    </main>
-    <footer>
-        <p>&copy; 2024 Contact Management</p>
-    </footer>
-    <script src="script.js"></script>
-</body>
-</html>
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+}
+
+header {
+    background-color: #333;
+    color: white;
+    padding: 1em 0;
+    text-align: center;
+}
+
+nav ul {
+    list-style: none;
+    padding: 0;
+    text-align: center;
+}
+
+nav ul li {
+    display: inline;
+    margin: 0 1em;
+}
+
+nav ul li a {
+    color: white;
+    text-decoration: none;
+}
+
+main {
+    padding: 2em;
+}
+
+footer {
+    background-color: #333;
+    color: white;
+    text-align: center;
+    padding: 1em 0;
+    position: fixed;
+    width: 100%;
+    bottom: 0;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    max-width: 400px;
+    margin: auto;
+}
+
+form label {
+    margin: 0.5em 0 0.2em 0;
+}
+
+form input, form textarea, form select, form button {
+    padding: 0.5em;
+    margin: 0.5em 0;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 1em;
+}
+
+table, th, td {
+    border: 1px solid black;
+    padding: 0.5em;
+}
+
+th, td {
+    text-align: left;
+}
