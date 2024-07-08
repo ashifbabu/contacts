@@ -26,18 +26,18 @@ function fetchContacts() {
                 row.insertCell(14).textContent = contact.postalCode;
                 row.insertCell(15).textContent = contact.country;
                 const actionsCell = row.insertCell(16);
-                actionsCell.innerHTML = `<button onclick="deleteContact('${contact.id}')">Delete</button>`;
+                actionsCell.innerHTML = `<button onclick="editContact('${contact.id}')">Edit</button> <button onclick="deleteContact('${contact.id}')">Delete</button>`;
             });
         })
         .catch(error => console.error('Error fetching contacts:', error));
 }
 
-// Add a new contact
+// Add or update a contact
 document.getElementById('contactForm').addEventListener('submit', function(event) {
     event.preventDefault();
     const formData = new FormData(event.target);
     const data = Object.fromEntries(formData.entries());
-    data.action = 'addContact';
+    data.action = data.id ? 'updateContact' : 'addContact';
 
     fetch(API_URL, {
         method: 'POST',
@@ -52,7 +52,7 @@ document.getElementById('contactForm').addEventListener('submit', function(event
         fetchContacts();
         event.target.reset();
     })
-    .catch(error => console.error('Error adding contact:', error));
+    .catch(error => console.error('Error saving contact:', error));
 });
 
 // Delete a contact
@@ -68,48 +68,33 @@ function deleteContact(id) {
     }
 }
 
-// Initial fetch of contacts when the page loads
-document.addEventListener('DOMContentLoaded', fetchContacts);
-
+// Edit a contact
+function editContact(id) {
+    fetch(`${API_URL}?action=getContacts`)
+        .then(response => response.json())
+        .then(data => {
+            const contact = data.find(c => c.id === id);
+            if (contact) {
+                document.getElementById('contactId').value = contact.id;
+                document.getElementById('firstName').value = contact.firstName;
+                document.getElementById('lastName').value = contact.lastName;
+                document.getElementById('dob').value = contact.dob;
+                document.getElementById('gender').value = contact.gender;
+                document.getElementById('passportNumber').value = contact.passportNumber;
+                document.getElementById('dateOfExpiry').value = contact.dateOfExpiry;
+                document.getElementById('nationality').value = contact.nationality;
+                document.getElementById('email').value = contact.email;
+                document.getElementById('mobile').value = contact.mobile;
+                document.getElementById('organization').value = contact.organization;
+                document.getElementById('designation').value = contact.designation;
+                document.getElementById('address').value = contact.houseStreetVillage;
+                document.getElementById('city').value = contact.city;
+                document.getElementById('postalCode').value = contact.postalCode;
+                document.getElementById('country').value = contact.country;
+            }
         })
-        .catch(error => console.error('Error fetching contacts:', error));
+        .catch(error => console.error('Error fetching contact:', error));
 }
 
-// Add a new contact
-document.getElementById('contactForm').addEventListener('submit', function(event) {
-    event.preventDefault();
-    const formData = new FormData(event.target);
-    const data = Object.fromEntries(formData.entries());
-    data.action = 'addContact';
-
-    fetch(https://script.google.com/macros/s/AKfycbyBnjPPHIo3kDN9OoEThht6AjqWtNuY3yNA8qbYzdoMSD7I31RFcu9GR_RV19LW03cW/exec, {
-        method: 'POST',
-        body: JSON.stringify(data),
-        headers: {
-            'Content-Type': 'application/json'
-        }
-    })
-    .then(response => response.text())
-    .then(result => {
-        alert(result);
-        fetchContacts();
-        event.target.reset();
-    })
-    .catch(error => console.error('Error adding contact:', error));
-});
-
-// Delete a contact
-function deleteContact(id) {
-    if (confirm('Are you sure you want to delete this contact?')) {
-        fetch(`${https://script.google.com/macros/s/AKfycbyBnjPPHIo3kDN9OoEThht6AjqWtNuY3yNA8qbYzdoMSD7I31RFcu9GR_RV19LW03cW/exec}?action=deleteContact&id=${id}`)
-            .then(response => response.json())
-            .then(result => {
-                alert(result);
-                fetchContacts();
-            })
-            .catch(error => console.error('Error deleting contact:', error));
-    }
-}
-
-// Initial fetch of contacts when the page loads
-document.addEventListener('DOMContentLoaded', fetchContacts);
+// Initial fetch of contacts
+fetchContacts();
